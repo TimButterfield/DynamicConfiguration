@@ -37,6 +37,12 @@ x64/
 *.vssscc
 .builds
 
+# JetBrains
+*.DotSettings
+
+#Assembly Info
+*/\Assemblyinfo.cs
+
 # Visual C++ cache files
 ipch/
 *.aps
