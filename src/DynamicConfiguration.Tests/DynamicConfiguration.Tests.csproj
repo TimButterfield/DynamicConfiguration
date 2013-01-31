@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\ConfigurationParserSpecs\when_parsing_configuration.cs" />
     <Compile Include="Unit\FirstItemInConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DynamicConfiguration\DynamicConfiguration.csproj">
+      <Project>{3DEF6BF9-BACD-4C05-8308-C8EFFEA14B30}</Project>
+      <Name>DynamicConfiguration</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
