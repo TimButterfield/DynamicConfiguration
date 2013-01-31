@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\ConfigurationParserSpecs\when_parsing_configuration.cs" />
+    <Compile Include="Unit\ConfigurationParserSpecs\when_trying_to_parse_a_none_existent_configuration_file.cs" />
     <Compile Include="Unit\FirstItemInConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>

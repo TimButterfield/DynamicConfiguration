@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Machine.Specifications;
 
 namespace DynamicConfiguration.Tests.Unit.ConfigurationParserSpecs
@@ -18,12 +16,5 @@ namespace DynamicConfiguration.Tests.Unit.ConfigurationParserSpecs
         private It then_the_first_attribute_should_have_a_value = () => configuration.ItemOne.FirstValue.Equals("This is not the real implementation");
 
         static dynamic configuration; 
-    }
-
-    public class when_trying_to_parse_a_none_existent_configuration_file
-    {
-        private Because of = () => Exception = Catch.Exception(() => ConfigurationParser.Parse("blah.config"));
-        private It then_the_parser_should_throw_an_exception = () => Exception.ShouldBeOfType<FileNotFoundException>(); 
-        static Exception Exception; 
     }
 }
