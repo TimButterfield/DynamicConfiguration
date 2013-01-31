@@ -7,12 +7,14 @@ namespace DynamicConfiguration.Tests.Unit.ConfigurationParserSpecs
     {
         Establish context = () =>
         {
-            configurationElements = ConfigurationParser.Parse("dynamic.config");
+            configuration = ConfigurationParser.Parse("dynamic.config");
         };
 
-        It then_it_should_not_be_null = () => ((IDictionary<string, object>)configurationElements).ShouldNotBeNull();
-        It then_it_contain_an_expected_element = () => configurationElements.ItemOne.FirstValue.Equals("This is not the real implementation"); 
+        It then_the_configuration_should_not_be_null = () => ((object)configuration).ShouldNotBeNull();
+        It then_the_configuration_should_contain_one_element = () => ((object)configuration.ItemOne).ShouldNotBeNull();
+        It then_the_first_element_should_have_an_attribute = () => ((object)configuration.ItemOne.FirstValue).ShouldNotBeNull();
+        private It then_the_first_attribute_should_have_a_value = () => configuration.ItemOne.FirstValue.Equals("This is not the real implementation");
 
-        static dynamic configurationElements; 
+        static dynamic configuration; 
     }
 }
