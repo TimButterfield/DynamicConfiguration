@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace DynamicConfiguration
@@ -8,18 +10,26 @@ namespace DynamicConfiguration
     public class ConfigurationParser
     {
         private static IDictionary<string, object> _dictionary;
-
-
+        
         public static dynamic Parse(string configurationPath = @"dynamic.config")
         {
             if (!File.Exists(configurationPath))
                 throw new FileNotFoundException(string.Format("Could not locate dynamic configuration {0}", configurationPath));
 
-            //use linq to xml to get all items under <easy>
             var configuration = XDocument.Load(configurationPath);
-            var rootElement = configuration.Root;
+            
+            if (!configuration.Nodes().Any())
+                throw new Exception("The configuration is empty");
 
+            var rootElement = configuration.Root;
+            ValidateRoot(rootElement); 
             return rootElement != null ? GetElements(rootElement.Elements()) : null;
+        }
+
+        private static void ValidateRoot(XElement rootElement)
+        {
+            if (rootElement.Name != "dynamic")
+                throw new Exception("root element must be dynamic");
         }
 
         private static dynamic GetElements(IEnumerable<XElement> elements, dynamic easyConfig = null)

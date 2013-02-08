@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Machine.Specifications;
+﻿using Machine.Specifications;
 
-namespace DynamicConfiguration.Tests.Unit.ConfigurationParserSpecs
+namespace DynamicConfiguration.Tests.Integration.ConfigurationParserSpecs
 {
     public class when_parsing_configuration
     {
