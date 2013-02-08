@@ -1,27 +1,53 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
-using System.Reflection;
+using System.Xml.Linq;
 
 namespace DynamicConfiguration
 {
     public class ConfigurationParser
     {
-        public static dynamic Parse(string configurationPath = @"~/Dynamic.config")
-        {
-            dynamic configuration = new ExpandoObject();
-            dynamic item = new ExpandoObject();
+        private static IDictionary<string, object> _dictionary;
 
+
+        public static dynamic Parse(string configurationPath = @"dynamic.config")
+        {
             if (!File.Exists(configurationPath))
                 throw new FileNotFoundException(string.Format("Could not locate dynamic configuration {0}", configurationPath));
 
-            var itemDictionary = (IDictionary<string, object>)item;
-            var configurationDictionary = (IDictionary<string, object>) configuration; 
-            itemDictionary.Add("FirstValue", "This is not the real implementation");
+            //use linq to xml to get all items under <easy>
+            var configuration = XDocument.Load(configurationPath);
+            var rootElement = configuration.Root;
 
-            configurationDictionary.Add("ItemOne", itemDictionary);
+            return rootElement != null ? GetElements(rootElement.Elements()) : null;
+        }
 
-            return configuration; 
+        private static dynamic GetElements(IEnumerable<XElement> elements, dynamic easyConfig = null)
+        {
+            foreach (var element in elements)
+            {
+                if (easyConfig == null)
+                {
+                    easyConfig = new ExpandoObject();
+                    _dictionary = (IDictionary<string, object>)easyConfig;
+                }
+
+                if (element.HasAttributes)
+                {
+                    dynamic item = new ExpandoObject();
+                    var localDictionary = (IDictionary<string, object>)item;
+
+                    foreach (var attribute in element.Attributes())
+                        localDictionary.Add(attribute.Name.ToString(), attribute.Value);
+                    
+                    _dictionary.Add(element.Name.ToString(), localDictionary);
+                }
+
+                if (element.HasElements)
+                    GetElements(element.Elements(), easyConfig);
+            }
+
+            return easyConfig;
         }
     }
 }

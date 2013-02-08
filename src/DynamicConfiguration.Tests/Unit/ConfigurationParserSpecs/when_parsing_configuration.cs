@@ -7,7 +7,7 @@ namespace DynamicConfiguration.Tests.Unit.ConfigurationParserSpecs
     {
         Establish context = () =>
         {
-            configuration = ConfigurationParser.Parse("dynamic.config");
+            configuration = ConfigurationParser.Parse();
         };
 
         It then_the_configuration_should_not_be_null = () => ((object)configuration).ShouldNotBeNull();
