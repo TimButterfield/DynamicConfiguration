@@ -2,7 +2,7 @@
 
 namespace DynamicConfiguration.Tests.Integration.ConfigurationParserSpecs
 {
-    public class when_parsing_configuration
+    public class when_parsing_configuration : ConfigDepenantFixture
     {
         Establish context = () =>
         {

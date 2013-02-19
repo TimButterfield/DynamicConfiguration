@@ -2,7 +2,7 @@
 
 namespace DynamicConfiguration.Tests.Integration.ConfigurationParserSpecs
 {
-    public class when_getting_all_items_in_configruation
+    public class when_getting_all_items_in_configruation : ConfigDepenantFixture
     {
         Establish parse_config = () => ParseConfiguration();
         Because and_then_get_first_item = () =>
