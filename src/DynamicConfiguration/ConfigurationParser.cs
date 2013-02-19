@@ -13,11 +13,12 @@ namespace DynamicConfiguration
         
         public static dynamic Parse(string configurationPath = @"dynamic.config")
         {
+            configurationPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configurationPath); 
+            
             if (!File.Exists(configurationPath))
                 throw new FileNotFoundException(string.Format("Could not locate dynamic configuration {0}", configurationPath));
 
-            
-            var configuration = XDocument.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configurationPath));
+            var configuration = XDocument.Load(configurationPath);
             
             if (!configuration.Nodes().Any())
                 throw new Exception("The configuration is empty");

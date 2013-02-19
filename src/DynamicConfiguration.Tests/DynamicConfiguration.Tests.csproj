@@ -46,17 +46,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Integration\ConfigurationParserSpecs\ConfigDepenantFixture.cs" />
+    <Compile Include="Integration\ConfigurationParserSpecs\when_config_root_element_is_not_dynamic.cs" />
     <Compile Include="Integration\ConfigurationParserSpecs\when_parsing_empty_configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Integration\ConfigurationParserSpecs\when_getting_all_items_in_configruation.cs" />
     <Compile Include="Integration\ConfigurationParserSpecs\when_parsing_configuration.cs" />
-    <Compile Include="Unit\ConfigurationParserSpecs\when_trying_to_parse_a_none_existent_configuration_file.cs" />
+    <Compile Include="Unit\ConfigurationParserSpecs\when_trying_to_parse_a_none_existent_configuration_file.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Integration\ConfigurationParserSpecs\when_getting_first_item_in_configuration.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="..\DynamicConfiguration\dynamic.config">
       <Link>dynamic.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ConfigWithMissingDynamicRoot.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Empty.config">
