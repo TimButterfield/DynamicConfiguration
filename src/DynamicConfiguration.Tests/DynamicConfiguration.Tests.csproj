@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Integration\Casting\when_casting_contents_of_a_configuration.cs" />
     <Compile Include="Integration\ConfigurationParserSpecs\ConfigDepenantFixture.cs" />
     <Compile Include="Integration\ConfigurationParserSpecs\when_config_root_element_is_not_dynamic.cs" />
     <Compile Include="Integration\ConfigurationParserSpecs\when_parsing_empty_configuration.cs" />
