@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using DynamicConfiguration.Parser;
 using Machine.Specifications;
 
 namespace DynamicConfiguration.Tests.Unit.ConfigurationParserSpecs

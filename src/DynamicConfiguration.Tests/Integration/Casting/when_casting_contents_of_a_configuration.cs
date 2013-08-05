@@ -1,18 +1,23 @@
 ﻿using System;
 using DynamicConfiguration.DuckTyping;
+using DynamicConfiguration.Parser;
 using Machine.Specifications;
 
 namespace DynamicConfiguration.Tests.Integration.Casting
 {
     public class when_casting_contents_of_a_configuration
     {
-        private Because the_parsed_configuration_is_cast = () =>
+        private Establish context = () =>
             {
-                var configuration = ConfigurationParser.Parse();
+                configuration = ConfigurationParser.Parse();
+            };
+
+        private Because the_contents_of_the_configuration_are_duck_typed = () =>
+            {
                 itemOne = DynamicDuck.AsIf<IAmTheFirstItem>(configuration.ItemOne);
                 itemThree = DynamicDuck.AsIf<IAmTheThirdItem>(configuration.ItemThree);
                 itemFour = DynamicDuck.AsIf<IAmTryingAnAlternativeDateFormat>(configuration.ItemFour);
-            };
+            }; 
 
         private It should_cast_to_type_matching_interface = () => itemOne.ShouldBeOfType<IAmTheFirstItem>();
         private It should_be_able_to_cast_to_int = () => itemOne.FirstValue.ShouldBeOfType<int>();
@@ -23,6 +28,7 @@ namespace DynamicConfiguration.Tests.Integration.Casting
         private static IAmTheFirstItem itemOne;
         private static IAmTheThirdItem itemThree;
         private static IAmTryingAnAlternativeDateFormat itemFour;
+        private static dynamic configuration; 
     }
 
     public interface IAmTryingAnAlternativeDateFormat

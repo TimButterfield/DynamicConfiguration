@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace DynamicConfiguration
+namespace DynamicConfiguration.Parser
 {
     public class ConfigurationParser
     {
@@ -30,6 +30,9 @@ namespace DynamicConfiguration
 
         private static void ValidateRoot(XElement rootElement)
         {
+            if (rootElement == null) 
+                throw new ArgumentNullException("rootElement");
+
             if (rootElement.Name != "dynamic")
                 throw new Exception("root element must be dynamic");
         }
@@ -64,7 +67,6 @@ namespace DynamicConfiguration
 
         private static object GetValue(XAttribute attribute)
         {
-            //cast in order of basic types converstions
             DateTime valueAsDateTime; 
             int valueAsInt;
             decimal valueAsDecimal;

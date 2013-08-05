@@ -39,7 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationParser.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Parser\ConfigurationParser.cs" />
     <Compile Include="DuckTyping\DynamicDuck.cs" />
     <Compile Include="DuckTyping\DynamicProxyBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
