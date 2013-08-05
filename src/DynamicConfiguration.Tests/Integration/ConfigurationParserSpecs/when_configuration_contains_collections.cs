@@ -11,8 +11,6 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationParserSpecs
                 {
                     var configuration = ConfigurationParser.Parse();
                 };
-
-
         }
     }
 }
