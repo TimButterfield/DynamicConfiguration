@@ -50,7 +50,7 @@ namespace DynamicConfiguration
                     var localDictionary = (IDictionary<string, object>)item;
 
                     foreach (var attribute in element.Attributes())
-                        localDictionary.Add(attribute.Name.ToString(), attribute.Value);
+                        localDictionary.Add(attribute.Name.ToString(), GetValue(attribute));
                     
                     _dictionary.Add(element.Name.ToString(), localDictionary);
                 }
@@ -60,6 +60,29 @@ namespace DynamicConfiguration
             }
 
             return easyConfig;
+        }
+
+        private static object GetValue(XAttribute attribute)
+        {
+            //cast in order of basic types converstions
+            DateTime valueAsDateTime; 
+            int valueAsInt;
+            decimal valueAsDecimal;
+            double valueAsDouble; 
+
+            if (DateTime.TryParse(attribute.Value, out valueAsDateTime))
+                return valueAsDateTime; 
+
+            if (int.TryParse(attribute.Value, out valueAsInt))
+                return valueAsInt;
+
+            if (double.TryParse(attribute.Value, out valueAsDouble))
+                return valueAsDouble;
+
+            if (decimal.TryParse(attribute.Value, out valueAsDecimal))
+                return valueAsDecimal; 
+
+            return attribute.Value;
         }
     }
 }
