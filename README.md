@@ -35,7 +35,7 @@ you have this :
 
 With the above code, you need to know the name of the xml node you're looking for in your configuration file. In this instance an xml node with the name myConfigurationItem. Calling the Find... then invokes a dynamic TryInvokeMember which returns the value of the first matching attribute with the name AMatchingPropertyNameHere. 
 
-You won't have intellisense as everything is dynamic. I've written the library to throw explcit exceptions where things can't be found, but the code is still in development so you might end up with runtime binder exceptions.
+You won't have intellisense as everything is dynamic. I've written the library to throw explcit exceptions where Xml elements and attributes can't be found, but the code is still in development so you might end up with runtime binder exceptions.
 
 More to come on asserting those values at appstart, in testsing etc, during the transformation process. 
 
