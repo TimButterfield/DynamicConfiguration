@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
+using System.Xml;
 using System.Xml.Linq;
+using DynamicConfiguration.Exceptions;
 
 namespace DynamicConfiguration
 {
@@ -24,40 +25,19 @@ namespace DynamicConfiguration
             _configuration = XDocument.Load(configurationPath);
         }
 
-
-//        public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
-//        {
-//            return base.TryInvokeMember(binder, args, out result);
-//        }
-
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
             var rootElement = _configuration.Root;
             ValidateRoot(rootElement);
-            dynamic configurationItem;
-
+            
             if (rootElement != null)
             {
-                var element = rootElement.Elements().Where(x => x.Name == binder.Name); 
-                if (!element.Any())
+                var matchingElements = rootElement.Elements().Where(x => x.Name == binder.Name).ToArray();
+
+                if (!matchingElements.Any())
                     throw new ConfigurationItemNotFoundException(string.Format("Configuration item {0} could not be found", binder.Name));
 
-//            foreach ()
-//            {
-////                if (element.)
-////                if (element.HasAttributes)
-////                {
-////                    foreach (var attribute in element.Attributes())
-////                        if (attribute.Name.ToString(), GetValue(attribute));
-////
-////                    _dictionary.Add(element.Name.ToString(), localDictionary);
-////                }
-////
-////                if (element.HasElements)
-////                    GetElements(element.Elements(), easyConfig);
-//            }
-
-                result = element;
+                result = new ConfigurationItem(matchingElements);
                 return true;
             }
             result = null; 
@@ -71,27 +51,62 @@ namespace DynamicConfiguration
 
             if (rootElement.Name != "dynamic")
                 throw new Exception("root element must be dynamic");
-        }
-        
-        
+        }        
     }
 
-    public class ConfigurationItemNotFoundException : Exception
+    public class ConfigurationItem : DynamicObject
     {
-        public ConfigurationItemNotFoundException()
+        private readonly IEnumerable<XElement> _configurationItems;
+
+        internal ConfigurationItem(IEnumerable<XElement> configurationItems)
         {
+            _configurationItems = configurationItems;
         }
 
-        public ConfigurationItemNotFoundException(string message) : base(message)
+        public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
         {
+            object matchedValue; 
+
+            if (binder.Name.StartsWith("Find"))
+                if (TryToFindAttribute(binder, out matchedValue))
+                {
+                    result = matchedValue;
+                    return true;
+                }
+
+
+            result = null;
+            return false; 
         }
 
-        public ConfigurationItemNotFoundException(string message, Exception innerException) : base(message, innerException)
+        private bool TryToFindAttribute(InvokeMemberBinder binder, out object result)
         {
-        }
+            var attributeName = binder.Name.Substring("Find".Length);
 
-        protected ConfigurationItemNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
+            foreach (var element in _configurationItems)
+            {
+                var matchingAttributes = element.Attributes(attributeName);
+
+                var xAttributes = matchingAttributes as XAttribute[] ?? matchingAttributes.ToArray();
+
+                if (xAttributes.Count() > 1)
+                    throw new InvalidXmlException(
+                        string.Format("More than one attribute found with the name {0} in XmlElement with name {1}",
+                                      attributeName, element.Name));
+
+                var match = xAttributes.FirstOrDefault();
+                if (match == null)
+                {
+                    result = null;
+                    return false;
+                }
+                
+                result = match.Value;
+                return true;
+            }
+
+            result = null; 
+            return false; 
         }
     }
 }

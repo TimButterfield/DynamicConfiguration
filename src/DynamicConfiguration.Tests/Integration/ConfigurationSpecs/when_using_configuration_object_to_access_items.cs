@@ -1,4 +1,5 @@
 ﻿using System;
+using DynamicConfiguration.Exceptions;
 using Machine.Specifications;
 
 namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
@@ -20,12 +21,21 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
 
         public class when_configuration_item_does_exist
         {
-            private Establish context = () => configuration = new Configuration();
+            private Establish context = () =>
+                {
+                    configuration = new Configuration();
+                    expectedResponse = Convert.ToDateTime("2013-08-05 12:01:10")
+                };
 
             private Because configuration_items_do_not_exist = () => itemFour = configuration.ItemFour;
 
-            private It shoudld_find_a_value_for_the_configuration_item = () => itemFour.FindAlternativeDateFormat().ShouldEqual(new DateTime());
+            private It should_find_a_value_for_the_configuration_item = () =>
+                {
+                    DateTime response = Convert.ToDateTime(itemFour.FindAlternativeDateFormat());
+                    response.ShouldEqual(expectedResponse);
+                };
 
+            private static DateTime expectedResponse;
             private static dynamic configuration;
             private static dynamic itemFour;
         }
