@@ -1,7 +1,9 @@
 DynamicConfiguration
 ====================
 
-Dynamic Configuration is a library to enable access to configuration settings without having to create matching configuration types
+Dynamic Configuration is a library to enable access to configuration settings without having to create matching configuration types. 
+
+I was inspired to write this library as I felt writing configuration classes was duplicating boilerplate code. I took inspiration for the syntax from Mark Rendles Simple Data.
 
 ===========================================================================================================================================
 
