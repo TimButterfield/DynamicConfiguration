@@ -9,29 +9,32 @@ No doubt you've worked with the appsettings, or ConnectionStrings sections of a 
 
 Dynamic Configuration is an attempt to remove that pain. So instead of having : 
 
-	[ConfigurationSection()]
-	public class MyConfigurationSection
+
+	public class MyConfigurationSection : ConfigurationSection
 	{
-		[ConfigurationProperty("MyProperty")]
+		[ConfigurationProperty("AMatchingPropertyNameHere")]
 		public bool MyConfigurationProperty
 		{ 
 	   		get 
            		{ 
-				return { Convert.ToBoolean(this["myProperty"]); 
+				return { Convert.ToBoolean(this["AMatchingPropertyNameHere"]); 
            		} 
 			set
 			{ 
-				this["myProperty"] = value;
+				this["AMatchingPropertyNameHere"] = value;
 			}
 		}
 	}
 
 you have this : 
 
-var configuration = new Configuration(); 
-configuration.myConfigurationSection.FindMyProperty()
+	var configuration = new Configuration(); 
+	configuration.myConfigurationItem.FindAMatchingPropertyNameHere();
 
+With the above code, you need to know the name of the xml node you're looking for in your configuration file. In this instance an xml node with the name myConfigurationItem. Calling the Find... then invokes a dynamic TryInvokeMember which returns the value of the first matching attribute with the name AMatchingPropertyNameHere. 
 
-Configuration is a dynamic type enables the .notation as in configuration.MyConfigurationElementNameHere
+You won't have intellisense as everything is dynamic. I've written the library to throw explcit exceptions where things can't be found, but the code is still in development so you might end up with runtime binder exceptions.
+
+More to come on asserting those values at appstart, in testsing etc, during the transformation process. 
 
 
