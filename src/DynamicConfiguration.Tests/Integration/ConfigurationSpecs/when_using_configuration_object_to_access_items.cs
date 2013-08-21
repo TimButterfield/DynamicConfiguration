@@ -49,25 +49,39 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
             private static dynamic _itemThree;
         }
 
-        public class when_trying_to_retrieve_a_collection_of_known_matching_configuration_items
+        public class when_retrieving_a_collection_of_connection_strings
         {
             private Because the_configuration_contains_a_collection_of_connection_strings = () =>
                 {
                     connectionStrings = Configuration.ConnectionStrings;
                 };
 
-            private It should_contain_the_same_number_of_connection_strings_as_is_present_in_the_config_file = () =>
+            private It should_be_possible_to_enumerate_the_collection = () =>
                 {
                     var connectionStringCount = 0; 
-                    foreach (dynamic connectionString in connectionStrings)
+                    foreach (var connectionString in connectionStrings)
                     {
                         connectionStringCount++; 
                     }
-                    
+
                     var config = XDocument.Load("dynamic.config");
-                    var countOfConnectionStringsFromFile = config.Descendants("ConnectionString").Count();                     
+                    var countOfConnectionStringsFromFile = config.Descendants("ConnectionString").Count();
 
                     connectionStringCount.ShouldEqual(countOfConnectionStringsFromFile);
+                };
+
+            private It should_contain_all_connection_strings_from_the_file = () =>
+                {
+                    var config = XDocument.Load("dynamic.config");
+                    var connectionStringsFromFile = config.Descendants("ConnectionString");
+
+                    var counter = 0;
+                    foreach (XElement connectionString in connectionStrings)
+                    {
+                        var name = connectionStringsFromFile.ElementAt(counter).Attribute("name").Value;
+                        connectionString.Attribute("name").Value.ShouldEqual(name);
+                        counter++;
+                    }
                 };
 
             private static dynamic connectionStrings; 

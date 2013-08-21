@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
+
 using DynamicConfiguration.Exceptions;
 
 namespace DynamicConfiguration
@@ -60,6 +63,24 @@ namespace DynamicConfiguration
 
             result = null; 
             return false; 
+        }
+
+        public XElement FirstOrDefault()
+        {
+            return _configurationItems.FirstOrDefault(); 
+        }
+
+        public XElement FirstOrDefault(Func<XElement, bool> predicate)
+        {
+            return _configurationItems.FirstOrDefault(predicate); 
+        }
+
+        public XElement ToXmlElement()
+        {
+            if (_configurationItems.Count() == 1)
+                return _configurationItems.First();
+
+            return null;
         }
 
         public IEnumerator<XElement> GetEnumerator()
