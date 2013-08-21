@@ -64,6 +64,7 @@
     <None Include="..\DynamicConfiguration\dynamic.config">
       <Link>dynamic.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="ConfigWithMissingDynamicRoot.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

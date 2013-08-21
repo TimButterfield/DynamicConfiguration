@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
+    <Compile Include="ConfigurationItem.cs" />
     <Compile Include="Exceptions\ConfigurationItemNotFoundException.cs" />
     <Compile Include="Exceptions\InvalidXmlException.cs" />
     <Compile Include="Parser\ConfigurationParser.cs" />
