@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using DynamicConfiguration.Exceptions;
@@ -76,10 +75,11 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
                     var connectionStringsFromFile = config.Descendants("ConnectionString");
 
                     var counter = 0;
-                    foreach (XElement connectionString in connectionStrings)
+                    foreach (dynamic connectionString in connectionStrings)
                     {
-                        var name = connectionStringsFromFile.ElementAt(counter).Attribute("name").Value;
-                        connectionString.Attribute("name").Value.ShouldEqual(name);
+                        string name = connectionString.Findname(); //Note case sensitivity as Xml is case sensitive
+                        var expectedValue = connectionStringsFromFile.ElementAt(counter).Attribute("name").Value;
+                        name.ShouldEqual(expectedValue);
                         counter++;
                     }
                 };

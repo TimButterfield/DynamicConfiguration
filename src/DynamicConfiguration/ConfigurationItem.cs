@@ -10,7 +10,7 @@ using DynamicConfiguration.Exceptions;
 
 namespace DynamicConfiguration
 {
-    public class ConfigurationItem : DynamicObject, IEnumerable<XElement>
+    public class ConfigurationItem : DynamicObject, IEnumerable<ConfigurationItem>
     {
         private readonly IEnumerable<XElement> _configurationItems;
 
@@ -37,6 +37,7 @@ namespace DynamicConfiguration
 
         private bool TryToFindAttribute(InvokeMemberBinder binder, out object result)
         {
+            //Need to remove the hard coding on "Find" with something better
             var attributeName = binder.Name.Substring("Find".Length);
 
             foreach (var element in _configurationItems)
@@ -83,12 +84,20 @@ namespace DynamicConfiguration
             return null;
         }
 
-        public IEnumerator<XElement> GetEnumerator()
+        public IEnumerator<ConfigurationItem> GetEnumerator()
         {
             if (_configurationItems.Count() == 1 && _configurationItems.Elements().Any())
-                return _configurationItems.Elements().GetEnumerator();
+            {
+                foreach (var element in _configurationItems.Elements())
+                {
+                    yield return new ConfigurationItem(new List<XElement> {element});
+                }
+            }
+            else
+            {
+                yield return new ConfigurationItem(new[] { _configurationItems.FirstOrDefault() }); 
+            }
 
-            return _configurationItems.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
