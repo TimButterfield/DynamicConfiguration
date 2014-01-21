@@ -4,9 +4,9 @@ using Machine.Specifications;
 
 namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
 {
-    public class NestedConfigurationSettingSpecs : WithSubject
+    public class NestedConfigurationSettingSpecs
     {
-        public class when_getting_a_configuration_setting_that_is_nested_in_the_xml
+        public class when_getting_a_configuration_settings_that_are_nested_in_the_xml
         {
             Establish context = () =>
             {
@@ -18,12 +18,9 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
             };
             
             Because of = () =>
-            {
-                
+            {           
                 Name = Configuration.log4net.appender.file.Findvalue();
-                ConverstionPattern = Configuration.log4net.appender.layout.conversionPattern.Findvalue(); 
-                
-                
+                ConverstionPattern = Configuration.log4net.appender.layout.conversionPattern.Findvalue();    
             };
 
             It should_resolve_the_values = () =>
