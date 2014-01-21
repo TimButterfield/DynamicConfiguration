@@ -43,7 +43,6 @@
     <Compile Include="ConfigurationItem.cs" />
     <Compile Include="Exceptions\ConfigurationItemNotFoundException.cs" />
     <Compile Include="Exceptions\InvalidXmlException.cs" />
-    <Compile Include="Parser\ConfigurationParser.cs" />
     <Compile Include="DuckTyping\DynamicDuck.cs" />
     <Compile Include="DuckTyping\DynamicProxyBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

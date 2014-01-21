@@ -35,6 +35,21 @@ namespace DynamicConfiguration
             return false; 
         }
 
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            var matches = _configurationItems.Where(x => x.Name == binder.Name);
+
+            var matchingElements = _configurationItems.Elements().Where(x => x.Name == binder.Name).ToArray();
+
+            if (!matchingElements.Any())
+                throw new ConfigurationItemNotFoundException(string.Format("Configuration item {0} could not be found", binder.Name));
+
+             result = new ConfigurationItem(matchingElements);
+             return true;
+            
+        } 
+
+
         private bool TryToFindAttribute(InvokeMemberBinder binder, out object result)
         {
             //Need to remove the hard coding on "Find" with something better
