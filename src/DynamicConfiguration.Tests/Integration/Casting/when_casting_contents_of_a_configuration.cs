@@ -23,7 +23,8 @@ namespace DynamicConfiguration.Tests.Integration.Casting
         private It should_be_able_to_cast_to_int = () => itemOne.FirstValue.ShouldBeOfType<int>();
         private It should_be_able_to_cast_to_datetime = () => itemThree.FirstValue.ShouldBeOfType<DateTime>();
         private It should_be_able_to_cast_to_double = () => itemThree.SecondValue.ShouldBeOfType<Double>();
-        private It should_be_able_to_case_to_alternativeDateTimeFormat = () => itemFour.AlternativeDateFormat.ShouldBeOfType<DateTime>();
+        private It should_be_able_to_cast_to_alternativeDateTimeFormat = () => itemFour.AlternativeDateFormat.ShouldBeOfType<DateTime>();
+        private It should_use_the_correct_date_format = () => itemFour.AlternativeDateFormat.ShouldEqual(DateTime.Parse("2013-08-05 12:01:10"));
         
         private static IAmTheFirstItem itemOne;
         private static IAmTheThirdItem itemThree;
