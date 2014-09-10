@@ -8,7 +8,7 @@ using System.Reflection.Emit;
 
 namespace DynamicConfiguration.DuckTyping
 {
-    //Thank you to http://weblogs.asp.net/britchie/archive/2010/08/03/dynamicduck-duck-typing-in-a-dynamic-world.aspx
+        //Thank you to http://weblogs.asp.net/britchie/archive/2010/08/03/dynamicduck-duck-typing-in-a-dynamic-world.aspx
     
         /// <summary>
         /// Extension methods for duck typing and dynamic casts.
