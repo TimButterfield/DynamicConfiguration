@@ -13,13 +13,15 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
 
             Because of = () =>
             {
-                var itemThree = Configuration.ItemThree; 
+                var itemThree = Configuration.ItemThree;
                 ItemThree = DynamicDuck.AsIf<IItemThree>(itemThree); 
             };
 
             It should_cast_the_configuration_item = () =>
             {
-                ItemThree.FirstValue.ShouldEqual(DateTime.Parse("05/08/2013 12:01:10"));
+                var result = ItemThree.FirstValue;
+                var expectation = DateTime.Parse("05/08/2013 12:01:10");
+                result.ShouldEqual(expectation);
                 ItemThree.SecondValue.ShouldEqual(100.00000m); 
             };
 

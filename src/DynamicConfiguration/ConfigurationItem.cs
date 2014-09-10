@@ -37,24 +37,58 @@ namespace DynamicConfiguration
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            var matches = _configurationItems.Where(x => x.Name == binder.Name);
-
             var matchingElements = _configurationItems.Elements().Where(x => x.Name == binder.Name).ToArray();
 
             if (!matchingElements.Any())
+            {
+                object matchedValue;
+
+                if (TryToFindAttribute(binder, out matchedValue))
+                {
+                    result = matchedValue;
+                    return true;
+                }
+
                 throw new ConfigurationItemNotFoundException(string.Format("Configuration item {0} could not be found", binder.Name));
+            }
+            
 
              result = new ConfigurationItem(matchingElements);
              return true;
             
-        } 
+        }
 
+        bool TryToFindAttribute(GetMemberBinder binder, out object result)
+        {
+            if (FindValue(binder.Name, out result))
+            {
+                return true; 
+            }
+            
+            result = null; 
+            return false; 
+        }
 
         private bool TryToFindAttribute(InvokeMemberBinder binder, out object result)
         {
-            //Need to remove the hard coding on "Find" with something better
-            var attributeName = binder.Name.Substring("Find".Length);
+            if (FindValue(binder.Name, out result))
+            {
+                return true;
+            }
 
+            result = null;
+            return false;   
+        }
+
+        bool FindValue(string name, out object result)
+        {
+            var attributeName = name; 
+            
+            if (name.Contains("Find"))
+            {
+                attributeName = name.Substring("Find".Length);
+            }
+            
             foreach (var element in _configurationItems)
             {
                 var matchingAttributes = element.Attributes(attributeName);
@@ -72,12 +106,13 @@ namespace DynamicConfiguration
                     result = null;
                     return false;
                 }
-                
+
+                //HERE YOU NEED TO LOOK AT THE TYPE-> And Whether you need to cast
                 result = match.Value;
                 return true;
             }
 
-            result = null; 
+            result = null;
             return false; 
         }
 

@@ -28,6 +28,7 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
                     ItemFour = Configuration.ItemFour;
                     ItemThree = Configuration.ItemThree; 
                 };
+
             It should_find_a_value_for_the_the_alternative_date_format_setting = () =>
                 {
                     DateTime result = Convert.ToDateTime(ItemFour.FindAlternativeDateFormat());
