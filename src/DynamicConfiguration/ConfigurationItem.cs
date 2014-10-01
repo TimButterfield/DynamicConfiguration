@@ -108,12 +108,29 @@ namespace DynamicConfiguration
                 }
 
                 //HERE YOU NEED TO LOOK AT THE TYPE-> And Whether you need to cast
-                result = match.Value;
+                result = ParseValue(match.Value);
                 return true;
             }
 
             result = null;
             return false; 
+        }
+
+        private object ParseValue(string value)
+        {
+            DateTime asDate;
+            decimal asDecimal;
+            int asInt; 
+            if (DateTime.TryParse(value, out asDate))
+                return asDate;
+
+            if (int.TryParse(value, out asInt))
+                return asInt; 
+
+            if (Decimal.TryParse(value, out asDecimal))
+                return asDecimal;
+
+            return value;
         }
 
         public XElement FirstOrDefault()
