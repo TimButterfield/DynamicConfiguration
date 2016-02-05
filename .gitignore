@@ -13,6 +13,15 @@ TestResults
 *.user
 *.sln.docstates
 
+#Ignore packet exe
+.paket/*.exe 
+
+#ignore nuget.exe
+*nuget.exe	
+
+#ignore fake dll's generated in build
+.fake/*.dll
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
