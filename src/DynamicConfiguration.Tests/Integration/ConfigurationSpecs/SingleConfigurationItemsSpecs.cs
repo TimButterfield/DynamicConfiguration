@@ -16,7 +16,7 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
         {
             Because configuration_items_do_not_exist = () => _exception = Catch.Exception(() => Configuration.AConfigurationItemThatDoesNotExist.FindSomething() );
 
-            It should_throw_a_runtime_exception = () => _exception.ShouldBeOfType<ConfigurationItemNotFoundException>();
+            It should_throw_a_runtime_exception = () => _exception.ShouldBeOfExactType<ConfigurationItemNotFoundException>();
             
             static Exception _exception;
         }

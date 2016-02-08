@@ -1,0 +1,6 @@
+source https://nuget.org/api/v2
+
+nuget FAKE
+nuget Machine.Specifications
+nuget Machine.Specifications.Should
+nuget Moq

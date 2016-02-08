@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfiguration", "DynamicConfiguration\DynamicConfiguration.csproj", "{3DEF6BF9-BACD-4C05-8308-C8EFFEA14B30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfiguration.Tests", "DynamicConfiguration.Tests\DynamicConfiguration.Tests.csproj", "{CB2FFFFE-CA46-4558-848B-55F11CC7D4D8}"
@@ -10,6 +12,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F316E1
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A9BED14-7D57-4B5D-BC98-74A3A0A2483B}"
+	ProjectSection(SolutionItems) = preProject
+		Build.bat = Build.bat
+		Build.fsx = Build.fsx
+		paket.dependencies = paket.dependencies
 	EndProjectSection
 EndProject
 Global

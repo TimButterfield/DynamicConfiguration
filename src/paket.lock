@@ -1,0 +1,8 @@
+NUGET
+  remote: https://www.nuget.org/api/v2
+  specs:
+    FAKE (4.19.0)
+    Machine.Specifications (0.9.3)
+    Machine.Specifications.Should (0.8.0)
+      Machine.Specifications (>= 0.9 < 1.0)
+    Moq (4.2.1510.2205)
