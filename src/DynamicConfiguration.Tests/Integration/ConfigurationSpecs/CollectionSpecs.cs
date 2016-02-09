@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 using Machine.Specifications;
 
@@ -24,7 +27,7 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
                     connectionStringCount++;
                 }
 
-                var config = XDocument.Load("dynamic.config");
+                var config = XDocument.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "dynamic.config"));
                 var countOfConnectionStringsFromFile = config.Descendants("ConnectionString").Count();
 
                 connectionStringCount.ShouldEqual(countOfConnectionStringsFromFile);
@@ -32,7 +35,7 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
 
             It should_contain_all_connection_strings_from_the_file = () =>
             {
-                var config = XDocument.Load("dynamic.config");
+                var config = XDocument.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "dynamic.config"));
                 var connectionStringsFromFile = config.Descendants("ConnectionString");
 
                 var counter = 0;

@@ -48,7 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Integration\Casting\" />
+    <Folder Include="Integration\ConfigurationSpecs\Casting\" />
     <Folder Include="Unit\" />
   </ItemGroup>
   <ItemGroup>

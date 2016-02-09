@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using Machine.Specifications;
 
@@ -12,7 +14,7 @@ namespace DynamicConfiguration.Tests.Integration.ConfigurationSpecs
             {
                 Configuration = new Configuration();
 
-                var configuration = XDocument.Load("dynamic.config");
+                var configuration = XDocument.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "dynamic.config"));
                 ExpectedFileAppenderFileName = GetAppenderFileName(configuration);
                 ExpectedConversionPattern = GetAppenderConversionPattern(configuration);
             };
