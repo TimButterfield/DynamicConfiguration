@@ -14,7 +14,7 @@ TestResults
 *.sln.docstates
 
 #Ignore packet exe
-src/.paket/*.exe 
+src/.paket/paket.exe 
 
 #ignore nuget.exe
 *nuget.exe	
