@@ -1,3 +1,6 @@
+
+AppVeyor: [![AppVeyor](https://ci.appveyor.com/api/projects/status/969jbosi0qwc1awg/branch/dev?svg=true)](https://ci.appveyor.com/project/aspnetci/mvc/branch/dev)
+
 DynamicConfiguration
 ====================
 
