@@ -14,13 +14,13 @@ TestResults
 *.sln.docstates
 
 #Ignore packet exe
-src/.paket/paket.exe 
+.paket/paket.exe 
 
 #ignore nuget.exe
 *nuget.exe	
 
 #ignore fake dll's generated in build
-src/.fake/*.*
+.fake/*.*
 
 # Build results
 [Dd]ebug/
