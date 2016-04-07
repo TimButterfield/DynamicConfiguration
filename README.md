@@ -1,5 +1,5 @@
 
-AppVeyor: https://ci.appveyor.com/api/projects/status/bjng4t42n39v8tec/branch/master?svg=true
+AppVeyor: [!AppVeyor](https://ci.appveyor.com/api/projects/status/bjng4t42n39v8tec/branch/master?svg=true)
 
 DynamicConfiguration
 ====================
