@@ -1,7 +1,7 @@
 
-[![Build status](https://ci.appveyor.com/api/projects/status/bjng4t42n39v8tec?svg=true)](https://ci.appveyor.com/project/TimButterfield/dynamicconfiguration)
+Overall Status : [![Build status](https://ci.appveyor.com/api/projects/status/bjng4t42n39v8tec?svg=true)](https://ci.appveyor.com/project/TimButterfield/dynamicconfiguration)
 
-[![Master Branch Build status](https://ci.appveyor.com/api/projects/status/bjng4t42n39v8tec/branch/master?svg=true)](https://ci.appveyor.com/project/TimButterfield/dynamicconfiguration/branch/master)
+Master Branch  : [![Master Branch status](https://ci.appveyor.com/api/projects/status/bjng4t42n39v8tec/branch/master?svg=true)](https://ci.appveyor.com/project/TimButterfield/dynamicconfiguration/branch/master)
 
 DynamicConfiguration
 ====================
