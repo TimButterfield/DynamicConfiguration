@@ -4,6 +4,9 @@ open Fake
 open Fake.MSpecHelper
 
 let buildMode = "Release"
+let directoryToPackage = "src/DynamicConfiguration/bin/" @@ buildMode
+let packagingRoot = "./packaging/"
+let packagingDir = packagingRoot @@ "DynamicConfiguration"
 
 let setParams defaults =
         { defaults with
@@ -37,10 +40,23 @@ Target "RunTests" (fun _ ->
     |> MSpec (fun parameters -> {parameters with HtmlOutputDir = testOutput} )
 )
 
+Target "CreateNugetPackage" (fun _ ->
+    let net45Dir = packagingDir @@ "lib/net45/" 
+    CopyFile net45Dir (directoryToPackage @@ "DynamicConfiguration.dll")
+    //CopyFile net45Dir (directoryToPackage @@ "Octokit.XML")
+    CopyFile net45Dir (directoryToPackage @@ "DynamicConfiguration.pdb")
+    //need to copy readme, etc... 
+    //CopyFiles directoryToPackage []
+)
+
+
+"Build"   
+    ==> "CreateNugetPackage"
+
 "Clean" 
     ==> "Build"
 
 "Build"
     ==> "RunTests"
-    
+
 RunTargetOrDefault "Build"
