@@ -16,9 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F316E1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A9BED14-7D57-4B5D-BC98-74A3A0A2483B}"
 	ProjectSection(SolutionItems) = preProject
-		Build.bat = Build.bat
-		Build.fsx = Build.fsx
-		paket.dependencies = paket.dependencies
+		..\Build.fsx = ..\Build.fsx
 	EndProjectSection
 EndProject
 Global

@@ -41,7 +41,12 @@ Target "RunTests" (fun _ ->
 )
 
 Target "CreateNugetPackage" (fun _ ->
+
     let net45Dir = packagingDir @@ "lib/net45/" 
+
+    directoryInfo net45Dir 
+    |> ensureDirExists
+    
     CopyFile net45Dir (directoryToPackage @@ "DynamicConfiguration.dll")
     //CopyFile net45Dir (directoryToPackage @@ "Octokit.XML")
     CopyFile net45Dir (directoryToPackage @@ "DynamicConfiguration.pdb")

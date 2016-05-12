@@ -22,6 +22,10 @@ TestResults
 #ignore fake dll's generated in build
 .fake/*.*
 
+#ignore packaging dir, no need to update package intended for nuget
+packaging/
+
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
