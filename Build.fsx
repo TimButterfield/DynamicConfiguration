@@ -8,7 +8,7 @@ let directoryToPackage = "src/DynamicConfiguration/bin/" @@ buildMode
 let packagingRoot = "./packaging/"
 let packagingDir = packagingRoot @@ "DynamicConfiguration"
 
-let setParams defaults =
+let setBuildParams defaults =
         { defaults with
             Verbosity = Some(Quiet)
             Targets = ["Build"]
@@ -21,6 +21,29 @@ let setParams defaults =
 
          }
 
+let authors = ["Tim Butterfield"]
+let projectName = "DynamicConfiguration"
+let projectDescription = "A .net library to make it simpler to access configuration settings from {app/web}.config files"
+let projectSummary = projectDescription
+
+let releaseNotes = 
+    ReadFile "ReleaseNotes.md"
+    |> ReleaseNotesHelper.parseReleaseNotes
+
+let setPackagingParams defaults =
+    {defaults with
+            Authors = authors
+            Project = projectName
+            Description = projectDescription
+            OutputPath = packagingRoot
+            Summary = projectSummary
+            WorkingDir = packagingDir
+            Version = releaseNotes.AssemblyVersion
+            ReleaseNotes = toLines releaseNotes.Notes
+            AccessKey = getBuildParamOrDefault "nugetkey" ""
+            Publish = hasBuildParam "nugetkey" 
+            }
+
 Target "Clean" (fun _ -> 
     DeleteDir "src/DynamicConfiguration/bin/debug"
     DeleteDir "src/DynamicConfiguration/bin/release"
@@ -29,7 +52,7 @@ Target "Clean" (fun _ ->
 )
 
 Target "Build" (fun _ ->
-    build setParams "src/DynamicConfiguration.sln"
+    build setBuildParams "src/DynamicConfiguration.sln"
 )
 
 let testDir = ".src/DynamicConfiguration.Tests/bin/release"
