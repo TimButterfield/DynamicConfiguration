@@ -65,6 +65,7 @@ Target "RunTests" (fun _ ->
 
 Target "CreateNugetPackage" (fun _ ->
 
+    printf "Creating a nuget package"
     let net45Dir = packagingDir @@ "lib/net45/" 
 
     directoryInfo net45Dir 
