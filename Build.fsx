@@ -72,7 +72,6 @@ Target "CreateNugetPackage" (fun _ ->
     |> ensureDirExists
     
     CopyFile net45Dir (directoryToPackage @@ "DynamicConfiguration.dll")
-    //CopyFile net45Dir (directoryToPackage @@ "Octokit.XML")
     CopyFile net45Dir (directoryToPackage @@ "DynamicConfiguration.pdb")
     //need to copy readme, etc... 
     //CopyFiles directoryToPackage []
